@@ -22,26 +22,26 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 public class DataLoader {
-
-    @Autowired
-    private RolRepository rolRepo;
-    
-    @Autowired
-    private MenuRepository meRepo;
-    
-    @Autowired
-    private UsuarioRepo usuRepo;
-    
-    @Autowired
-    private EncargadoRepo encRepo;
-
-    @Autowired
-    private PersonaRepo perRepo;
-    
-    @PostConstruct
-    public void loadData() {
+/*
+	    @Autowired
+	    private RolRepository rolRepo;
+	    
+	    @Autowired
+	    private MenuRepository meRepo;
+	    
+	    @Autowired
+	    private UsuarioRepo usuRepo;
+	    
+	    @Autowired
+	    private EncargadoRepo encRepo;
+	
+	    @Autowired
+	    private PersonaRepo perRepo;
+	    
+	    @PostConstruct
+	    public void loadData() {
+	    	
     	
-    	/*
     	List<Menu> menus = new ArrayList<Menu>();
     	List<Menu> menus2 = new ArrayList<Menu>();
     	Menu menu1 = new Menu();
@@ -199,6 +199,6 @@ public class DataLoader {
         usuRepo.save(usuario);
         
         Persona per2 = new Persona();
-    	*/
-    }
+    	
+    }*/
 }
