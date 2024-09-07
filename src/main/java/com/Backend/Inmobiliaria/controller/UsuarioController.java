@@ -24,7 +24,7 @@ public class UsuarioController {
 	
 	@GetMapping("/listaUsuarios")
 	public List<Usuario> listarUsuarios(){
-		return usuRepo.findAll();
+		 return usuRepo.findAllExcept(10);
 	}
 	
 	@GetMapping({"/login"})
