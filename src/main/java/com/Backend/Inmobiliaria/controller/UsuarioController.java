@@ -24,7 +24,7 @@ public class UsuarioController {
 	
 	@GetMapping("/listaUsuarios")
 	public List<Usuario> listarUsuarios(){
-		 return usuRepo.findAllExcept(10);
+		return usuRepo.findAll();
 	}
 	
 	@GetMapping({"/login"})
@@ -40,7 +40,9 @@ public class UsuarioController {
 	
 	@PutMapping("/modUsuario")
 	public ResponseEntity<Usuario> modificarUsuario(@RequestBody Usuario usu){
-		usu.setPass_usu(usu.getEncargado().getPersona().getCi());
+		usu.setNom_usu(usu.getNom_usu());
+		usu.setPass_usu(usu.getPass_usu());
+		
 		Usuario usuMod = usuRepo.save(usu);
 		return ResponseEntity.ok(usuMod);	
 	}
