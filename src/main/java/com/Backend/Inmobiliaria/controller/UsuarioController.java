@@ -40,9 +40,7 @@ public class UsuarioController {
 	
 	@PutMapping("/modUsuario")
 	public ResponseEntity<Usuario> modificarUsuario(@RequestBody Usuario usu){
-		usu.setNom_usu(usu.getNom_usu());
-		usu.setPass_usu(usu.getPass_usu());
-		
+		usu.setPass_usu(usu.getEncargado().getPersona().getCi());
 		Usuario usuMod = usuRepo.save(usu);
 		return ResponseEntity.ok(usuMod);	
 	}
