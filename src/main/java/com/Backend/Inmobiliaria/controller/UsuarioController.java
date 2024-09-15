@@ -23,8 +23,13 @@ public class UsuarioController {
 	private UsuarioRepo usuRepo;
 	
 	@GetMapping("/listaUsuarios")
-	public List<Usuario> listarUsuarios(){
-		return usuRepo.findAll();
+	public ResponseEntity<List<Usuario>> listarUsuarios(){
+	    try {
+	        List<Usuario> usuarios = usuRepo.findAll();
+	        return ResponseEntity.ok(usuarios);
+	    } catch (Exception e) {
+	        return ResponseEntity.status(500).body(null); // Devuelve un 500 si ocurre un error
+	    }
 	}
 	
 	@GetMapping({"/login"})
