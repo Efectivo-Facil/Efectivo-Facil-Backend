@@ -24,11 +24,17 @@ public class UsuarioController {
 	
 	@GetMapping("/listaUsuarios")
 	public ResponseEntity<List<Usuario>> listarUsuarios(){
+	    long startTime = System.currentTimeMillis();
+	    
 	    try {
 	        List<Usuario> usuarios = usuRepo.findAll();
+	        long endTime = System.currentTimeMillis();
+	        System.out.println("Tiempo de ejecución: " + (endTime - startTime) + " ms");
+	        
 	        return ResponseEntity.ok(usuarios);
 	    } catch (Exception e) {
-	        return ResponseEntity.status(500).body(null); // Devuelve un 500 si ocurre un error
+	        e.printStackTrace(); // Agrega el stack trace para más detalles
+	        return ResponseEntity.status(500).body(null); 
 	    }
 	}
 	
