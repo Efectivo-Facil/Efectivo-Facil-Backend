@@ -60,13 +60,5 @@ public class Encargado {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-
-	public void setId_enc(int id_enc) {
-		this.id_enc = id_enc;
-	}
-
-	public void setFecha_ing(Date fecha_ing) {
-		this.fecha_ing = fecha_ing;
-	}
 	
 }

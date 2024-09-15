@@ -16,12 +16,12 @@ import com.Backend.Inmobiliaria.model.Prestamo;
 public interface EncargadoRepo extends JpaRepository<Encargado, Integer> {
 
 	Boolean existsByPersona(Persona per);
-
+	
 	@Modifying
 	@Query(value = "insert into usuario (nom_usu, pass_usu, activo_usu, id_enc) values (:nom_usu, :pass_usu, true, :id_enc)", nativeQuery = true)
-	public int asignarUsuario(@Param("nom_usu") String nom, @Param("pass_usu") String pass, @Param("id_enc") int id);
+	public int asignarUsuario (@Param("nom_usu") String nom, @Param("pass_usu") String pass, @Param("id_enc") int id);
 
 	@Query(value = "SELECT e.* FROM encargado e WHERE e.id_enc NOT IN (SELECT id_enc FROM usuario)", nativeQuery = true)
 	public List<Encargado> listaEncargadosSinUsuario();
-
+	
 }
