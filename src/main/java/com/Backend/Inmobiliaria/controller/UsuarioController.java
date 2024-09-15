@@ -19,45 +19,78 @@ import com.Backend.Inmobiliaria.model.Usuario;
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
-	@Autowired
-	private UsuarioRepo usuRepo;
-	
-	@GetMapping("/listaUsuarios")
-	public List<Usuario> listarUsuarios(){
-		return usuRepo.findAll();
-	}
-	
-	@GetMapping({"/login"})
-	public Usuario login(@RequestParam String nombre, @RequestParam String pass) {
-		Usuario usu = usuRepo.verificaCuenta(nombre, pass);
-		return usu;
-	}
-	
-	@PostMapping("/crearUsuario")
-	public Usuario crearUsuario (@RequestBody Usuario usu) {
-	    return usuRepo.save(usu);
-	}
-	
-	@PutMapping("/modUsuario")
-	public ResponseEntity<Usuario> modificarUsuario(@RequestBody Usuario usu){
-		usu.setPass_usu(usu.getEncargado().getPersona().getCi());
-		Usuario usuMod = usuRepo.save(usu);
-		return ResponseEntity.ok(usuMod);	
-	}
-	
-	@PutMapping("/modEstadoUsuario")
-	public ResponseEntity<Usuario> modEstadoUsuario(@RequestBody Usuario usu){
-		usu.setActivo_usu(!usu.isActivo_usu());
-		
-		Usuario usuMod = usuRepo.save(usu);
-		return ResponseEntity.ok(usuMod);	
-	}
-	
-	@PutMapping("/modRolUsuario")
-	public ResponseEntity<Usuario> modUsuarioRol(@RequestBody Usuario usu){
-		usu.setRol(usu.getRol());
-		
-		Usuario usuMod = usuRepo.save(usu);
-		return ResponseEntity.ok(usuMod);	
-	}
+    @Autowired
+    private UsuarioRepo usuRepo;
+
+    @GetMapping("/listaUsuarios")
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+        try {
+            List<Usuario> usuarios = usuRepo.findAll();
+            return ResponseEntity.ok(usuarios);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Usuario> login(@RequestParam String nombre, @RequestParam String pass) {
+        try {
+            Usuario usu = usuRepo.verificaCuenta(nombre, pass);
+            if (usu != null) {
+                return ResponseEntity.ok(usu);
+            } else {
+                return ResponseEntity.status(404).body(null); // Devuelve 404 si no se encuentra el usuario
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @PostMapping("/crearUsuario")
+    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usu) {
+        try {
+            Usuario nuevoUsuario = usuRepo.save(usu);
+            return ResponseEntity.ok(nuevoUsuario);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @PutMapping("/modUsuario")
+    public ResponseEntity<Usuario> modificarUsuario(@RequestBody Usuario usu) {
+        try {
+            usu.setPass_usu(usu.getEncargado().getPersona().getCi());
+            Usuario usuMod = usuRepo.save(usu);
+            return ResponseEntity.ok(usuMod);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @PutMapping("/modEstadoUsuario")
+    public ResponseEntity<Usuario> modEstadoUsuario(@RequestBody Usuario usu) {
+        try {
+            usu.setActivo_usu(!usu.isActivo_usu());
+            Usuario usuMod = usuRepo.save(usu);
+            return ResponseEntity.ok(usuMod);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
+
+    @PutMapping("/modRolUsuario")
+    public ResponseEntity<Usuario> modUsuarioRol(@RequestBody Usuario usu) {
+        try {
+            Usuario usuMod = usuRepo.save(usu);
+            return ResponseEntity.ok(usuMod);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
+    }
 }
