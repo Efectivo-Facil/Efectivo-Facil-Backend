@@ -15,7 +15,7 @@ import com.Backend.Inmobiliaria.Repository.UsuarioRepo;
 import com.Backend.Inmobiliaria.model.Usuario;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
