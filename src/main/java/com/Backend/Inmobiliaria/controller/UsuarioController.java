@@ -15,7 +15,7 @@ import com.Backend.Inmobiliaria.Repository.UsuarioRepo;
 import com.Backend.Inmobiliaria.model.Usuario;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
@@ -23,8 +23,16 @@ public class UsuarioController {
 	private UsuarioRepo usuRepo;
 	
 	@GetMapping("/listaUsuarios")
-	public List<Usuario> listarUsuarios(){
-		return usuRepo.findAll();
+	public ResponseEntity<List<Usuario>> listarUsuarios(){
+	    try {
+	        System.out.println("Inicio de listarUsuarios");
+	        List<Usuario> usuarios = usuRepo.findAll();
+	        System.out.println("Usuarios obtenidos: " + usuarios.size());
+	        return ResponseEntity.ok(usuarios);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(500).body(null); 
+	    }
 	}
 	
 	@GetMapping({"/login"})
