@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Backend.Inmobiliaria.Repository.ClienteRepo;
 import com.Backend.Inmobiliaria.Repository.CompraRepo;
-import com.Backend.Inmobiliaria.exception.ResourceNotFoundException;
 import com.Backend.Inmobiliaria.model.Cliente;
 import com.Backend.Inmobiliaria.model.Compra;
-import com.Backend.Inmobiliaria.model.Persona;
-import com.Backend.Inmobiliaria.model.Prestamo;
 import com.Backend.Inmobiliaria.model.Producto;
 
 

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.Backend.Inmobiliaria.Repository.ClienteRepo;
 import com.Backend.Inmobiliaria.Repository.PersonaRepo;
-import com.Backend.Inmobiliaria.exception.ResourceNotFoundException;
 import com.Backend.Inmobiliaria.model.Cliente;
 import com.Backend.Inmobiliaria.model.Persona;
 
@@ -35,10 +34,10 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/crearCliente")
-	public Cliente crearCliente (@RequestBody Cliente cli) throws ResourceNotFoundException {
+	public Cliente crearCliente (@RequestBody Cliente cli){
 		List<Persona> per = perRepo.findByCi(cli.getPersona().getCi());
 		if (!per.isEmpty()) {
-	        throw new ResourceNotFoundException("El ci ingresado ya se encuentra registrado.");
+	        return cli;
 	    }
 		
         Cliente nuevoCli = cliRepo.save(cli);
